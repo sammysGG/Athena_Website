@@ -1,0 +1,28 @@
+services:
+  valitsus:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: valitsus:latest
+    container_name: valitsus
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: "file:/app/data/prod.db"
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-https://scada.goathost.gg}
+      NODE_ENV: production
+    ports:
+      - "127.0.0.1:18092:3000"
+    volumes:
+      - ./data:/app/data
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - >-
+          node -e "fetch('http://127.0.0.1:3000/api/articles').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 25s
+    security_opt:
+      - no-new-privileges:true

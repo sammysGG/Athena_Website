@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  color: var(--color-ink);
+  background: #ffffff;
+}
+
+@theme {
+  /* Estonian state identity palette */
+  --color-govblue: #0072ce;
+  --color-govblue-dark: #003a70;
+  --color-ink: #1a1a1a;
+  --color-muted: #5a6470;
+  --color-line: #e0e3e8;
+  --color-soft: #f4f6f8;
+
+  --breakpoint-xsm: 425px;
+  --breakpoint-xxl: 1440px;
+}
+
+@layer utilities {
+  .container {
+    @apply w-full max-w-[78rem] mx-auto sm:px-7 px-5;
+  }
+  /* link styling for body copy */
+  .prose-gov a {
+    @apply text-govblue underline underline-offset-2;
+  }
+}
+
+@layer base {
+  a {
+    color: inherit;
+  }
+  h1 {
+    @apply text-3xl sm:text-4xl md:text-[2.6rem] leading-tight font-semibold tracking-tight;
+  }
+  h2 {
+    @apply text-2xl md:text-3xl font-semibold tracking-tight;
+  }
+  h3 {
+    @apply text-xl md:text-2xl font-semibold;
+  }
+}
+
+/* ---- Accessibility: high-contrast mode (yellow on black) ---------------- */
+html.contrast,
+html.contrast body {
+  background: #000 !important;
+  color: #ffea00 !important;
+}
+html.contrast a,
+html.contrast h1,
+html.contrast h2,
+html.contrast h3,
+html.contrast p,
+html.contrast span,
+html.contrast li {
+  color: #ffea00 !important;
+}
+html.contrast img {
+  filter: grayscale(100%) contrast(1.1);
+}
+html.contrast .gov-surface,
+html.contrast header,
+html.contrast footer,
+html.contrast .gov-card {
+  background: #000 !important;
+  border-color: #ffea00 !important;
+}
+
+/* ---- Accessibility: text scaling --------------------------------------- */
+html.text-lg {
+  font-size: 112.5%;
+}
+html.text-xl {
+  font-size: 125%;
+}
+
+/* Preserve newlines in article bodies that we render as paragraphs */
+.article-body p {
+  @apply mb-5 leading-relaxed text-[1.05rem];
+}
+.article-body ul {
+  @apply mb-5 list-disc pl-6 space-y-1;
+}

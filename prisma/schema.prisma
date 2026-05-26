@@ -1,0 +1,77 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  username     String   @unique
+  displayName  String
+  passwordHash String
+  // "admin" can publish/edit news and access the newsroom; "employee" can
+  // access the staff intranet only.
+  role         String   @default("employee")
+  // Staff-directory fields (shown in the employee intranet).
+  jobTitle     String?
+  department   String?
+  phone        String?
+  createdAt    DateTime @default(now())
+
+  articles Article[]
+}
+
+model Article {
+  id        String  @id @default(cuid())
+  slug      String  @unique
+  title     String
+  // Short standfirst shown in listings and at the top of the article.
+  summary   String
+  // Full body. Plain text with blank-line-separated paragraphs.
+  body      String
+  // "press-release" | "statement" | "news" | "decision" | "speech"
+  kind      String  @default("press-release")
+  // Topic tag: "security" | "defence" | "cyber" | "foreign-affairs" |
+  // "economy" | "domestic" | "eu" | null
+  topic     String?
+  // Issuing body shown as the source line, e.g. "Government Communication Unit".
+  source    String  @default("Government Communication Unit")
+  heroImage String?
+  // Featured items surface on the homepage hero. Pinned sort to the very top.
+  featured  Boolean @default(false)
+  pinned    Boolean @default(false)
+  // "published" | "draft"
+  status    String  @default("published")
+  // When set in the future, the article is withheld from public view until
+  // the time passes. Used for scheduled scenario injects.
+  publishedAt  DateTime  @default(now())
+  scheduledFor DateTime?
+
+  authorId String
+  author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status, publishedAt])
+  @@index([topic])
+}
+
+model Minister {
+  id        String  @id @default(cuid())
+  name      String
+  // Office title, e.g. "Prime Minister", "Minister of Defence".
+  title     String
+  // The ministry / portfolio area.
+  portfolio String?
+  party     String?
+  photoUrl  String?
+  bio       String?
+  // Sort order on the government page (Prime Minister first).
+  order     Int     @default(100)
+  createdAt DateTime @default(now())
+}
