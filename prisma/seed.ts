@@ -29,7 +29,7 @@ const SEED_USERS: SeedUser[] = [
     email: "admin@valitsus.local",
     username: "admin",
     displayName: "Communication Unit",
-    password: "admin1234", // default admin credentials — intended hardening target
+    password: "Cool2Pass", // default admin credentials — intended hardening target
     role: "admin",
     jobTitle: "System Administrator",
     department: "Government Office — IT",
@@ -201,15 +201,17 @@ Residents in the exercise area may notice increased military traffic, low-flying
     agoHours: 9,
   },
   {
-    slug: "counter-uas-measures-eastern-training-areas",
-    title: "Defence Forces deploy counter-drone measures around eastern training areas",
+    slug: "donovian-drone-incursions-eastern-estonia",
+    title: "Defence Forces counter Donovian drone incursions over eastern Estonia",
     summary:
-      "Counter-unmanned-aircraft systems have been positioned around active training areas after repeated unidentified drone sightings. The Defence Forces ask the public not to fly drones near military activity.",
-    body: `The Defence Forces have deployed counter-unmanned-aircraft (counter-UAS) capabilities around active training areas in eastern Estonia following a number of unidentified drone sightings in recent days.
+      "The Defence Forces have deployed counter-drone systems along the eastern border after repeated incursions by unmanned aircraft assessed to have been launched from the Donovian side.",
+    body: `The Defence Forces have deployed counter-unmanned-aircraft (counter-UAS) capabilities along Estonia's eastern border following a series of drone incursions over recent days that the Ministry of Defence assesses were launched from the Donovian side of the frontier.
 
-The measures are precautionary and are intended to protect personnel and to preserve the integrity of ongoing training. Several of the sightings are likely attributable to hobbyists and media, and the Defence Forces remind the public that flying drones over or near military activity is prohibited and may be treated as interference.
+The drones, several of which crossed into Estonian airspace near Defence Forces training areas, appear to have been conducting reconnaissance. No weapons were employed and no damage has been reported, but the Government regards the repeated violations of Estonian airspace as a deliberate act of pressure consistent with Donovia's wider sub-threshold campaign.
 
-Anyone who observes a drone behaving suspiciously near critical infrastructure or military sites is asked to note the time and location and to contact the Police and Border Guard Board. The Government is treating the protection of the airspace over key sites as a standing priority.`,
+"These are not lost hobby drones — they are a message, and we have received it," the Minister of Defence said. "Every incursion is tracked, recorded and reported to our allies. Estonia's airspace will be defended."
+
+The incursions have been formally protested through diplomatic channels. Residents near the border who observe a drone should note the time and location and contact the Police and Border Guard Board; the public is reminded not to fly their own drones near military activity.`,
     kind: "press-release",
     topic: "defence",
     source: "Ministry of Defence",
@@ -279,7 +281,7 @@ The measure forms part of the Government's wider work on the security of the dig
       "The Government has confirmed that operations at the Port of Tallinn are normal. Two vessels remain at anchor outside the inner harbour awaiting routine documentation.",
     body: `Following online speculation, the Government confirms that operations at the Port of Tallinn are proceeding normally and that no shipping has been turned away.
 
-The Harbour Master reports that two foreign-flagged tankers are at anchor outside the inner harbour awaiting completion of routine documentation, in line with standard procedure. Their presence is administrative and is not connected to any security incident.
+The Harbour Master reports that two Donovian-flagged tankers are at anchor outside the inner harbour awaiting completion of routine documentation, in line with standard procedure. Their presence is administrative and is not, at this stage, connected to any security incident.
 
 "Rumour travels faster than a tanker," a port spokesperson said. "The facts are dull, and we are glad of it: the port is open, cargo is moving, and the waiting vessels are a paperwork matter."
 

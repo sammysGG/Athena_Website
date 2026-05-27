@@ -20,7 +20,7 @@ an exercise.
 | Auth | NextAuth.js, Credentials provider, JWT sessions |
 | DB | SQLite via Prisma |
 | Passwords | bcryptjs |
-| Runtime | Docker (multi-stage, runs as non-root) |
+| Runtime | systemd (`next start` as www-data, fronted by nginx) |
 
 ## Pages
 
@@ -37,7 +37,7 @@ persist in `localStorage`.
 
 ## Default admin
 
-`admin@valitsus.local` / `admin1234` — **change this before any real use.**
+`admin` (`admin@valitsus.local`) / `Cool2Pass` — **change this before any real use.**
 
 ## Scenario content
 
@@ -46,7 +46,7 @@ track the Tw@er storyline: overnight cyber activity against municipal services, 
 2026, counter-drone measures, a measured statement on Donovian rhetoric, Tallinn port
 normality, NATO coordination, disinformation guidance and the NB8 summit. Seeding is
 idempotent — it only inserts articles when the table is empty, so content published live
-during the exercise is never clobbered on container restart.
+during the exercise is never clobbered on service restart.
 
 ## API
 
@@ -67,19 +67,21 @@ npm run db:seed
 npm run dev                   # http://localhost:3000
 ```
 
-### Docker (production)
+### systemd (production)
+
+On a range box this is provisioned by the Ansible role in `deploy.yml`: it installs
+Node + nginx, builds the app, and installs a `valitsus.service` unit that runs
+`prisma migrate deploy` (ExecStartPre) then `next start -H 127.0.0.1 -p 18092` as the
+`www-data` user. The SQLite db lives in `./data` (owned by `www-data`) and survives the
+boot-time `git reset --hard` rebuild, so live-published content is never clobbered.
 
 ```bash
-docker compose up -d --build  # binds 127.0.0.1:18092 -> 3000
+sudo systemctl status valitsus.service     # app
+journalctl -u valitsus.service -f          # logs
 ```
-
-The container runs `prisma migrate deploy` then the seed (idempotent) on boot. The SQLite db
-lives in the `./data` volume — **it must be owned by uid 1001** (the container's `nextjs`
-user): `chown -R 1001:1001 data`.
 
 ## Deployment
 
-Fronted by nginx at **scada.goathost.gg** (Let's Encrypt), `proxy_pass` → `127.0.0.1:18092`.
-This swapped in for Tw@er; the previous nginx config is backed up alongside
-`/etc/nginx/sites-available/scada.goathost.gg.conf`. To swap Tw@er back: start its container
-(`cd /var/www/twatter && docker compose up -d`) and point `proxy_pass` back to `:18091`.
+Fronted by nginx (self-signed range cert at `/etc/ssl/range`), `proxy_pass` →
+`127.0.0.1:18092`. The boot-time `valitsus-update.service` pulls `origin/main`, rebuilds,
+and restarts the app on every boot.
