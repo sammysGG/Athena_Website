@@ -3,6 +3,7 @@ import { Manrope } from "next/font/google";
 import "./globals.css";
 import Header from "@/app/components/layout/Header";
 import Footer from "@/app/components/layout/Footer";
+import ExerciseBanner from "@/app/components/layout/ExerciseBanner";
 import { Providers } from "@/providers/sessionProviders";
 
 const manrope = Manrope({
@@ -31,6 +32,7 @@ export default function RootLayout({
           <Header />
           <main className="min-h-[60vh]">{children}</main>
           <Footer />
+          <ExerciseBanner />
         </Providers>
       </body>
     </html>

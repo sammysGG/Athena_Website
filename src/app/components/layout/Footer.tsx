@@ -100,15 +100,10 @@ export default function Footer() {
 
       <div className="border-t border-white/15">
         <div className="container py-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-white/60">
-          <span>© {new Date().getFullYear()} Government of the Republic of Estonia</span>
+          <span>Exercise Athena Strike 2026</span>
           <Link href="/sign-in" className="hover:text-white/90">
             Staff login
           </Link>
-        </div>
-        {/* Exercise / scenario notice — unobtrusive, for responsible hosting. */}
-        <div className="container pb-4 text-[0.65rem] leading-snug text-white/35">
-          Training and exercise environment. Scenario content is fictional and is not an
-          official publication of the Government of the Republic of Estonia.
         </div>
       </div>
     </footer>

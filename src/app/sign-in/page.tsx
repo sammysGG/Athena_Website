@@ -23,7 +23,7 @@ export default function SignInPage() {
       <div className="border border-amber-300 bg-amber-50 text-amber-900 rounded-md p-4 mb-5 text-sm leading-relaxed">
         <p className="font-semibold mb-1">⚠ Exercise system — restricted access</p>
         <p>
-          All names, accounts and information on this system are{" "}
+          Other than some images, all names, accounts and information on this system are{" "}
           <strong>purely fictional</strong> and form part of a training exercise. This is not a
           real government system. Access is restricted to authorised exercise participants only;
           activity may be monitored and recorded. By signing in you agree to the{" "}
