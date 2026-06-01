@@ -29,7 +29,7 @@ const SEED_USERS: SeedUser[] = [
     email: "admin@valitsus.local",
     username: "admin",
     displayName: "Communication Unit",
-    password: "Cool2Pass", // default admin credentials — intended hardening target
+    password: "Dodge.Edge.Portal!426", // hardened admin credentials
     role: "admin",
     jobTitle: "System Administrator",
     department: "Government Office — IT",
